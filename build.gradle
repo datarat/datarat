@@ -7,21 +7,30 @@ buildscript {
     //a list of dependencies for this build script
     dependencies {
         //for release lifecycle management
-        classpath "net.researchgate:gradle-release:2.2.1"
+        classpath 'net.researchgate:gradle-release:2.2.1'
+        classpath 'org.springframework.boot:spring-boot-gradle-plugin:1.2.5.RELEASE'
     } 
 }
 
 //plugins to apply to this and all sub-projects
 allprojects {
-    apply plugin: 'net.researchgate.release'    //for releasing new versions
+    apply plugin: 'application'
     apply plugin: 'java'
+    apply plugin: 'net.researchgate.release'    //for releasing new versions
+    apply plugin: 'spring-boot'
     apply plugin: 'war'
+    
+    //sourceCompatibility = 1.8
+    //targetCompatibility = 1.8
     
     repositories {
         jcenter()
     }
     
     dependencies {
+        compile 'org.hibernate:hibernate-core:5.0.1.Final'
+        compile 'org.springframework.boot:spring-boot-starter-web'
+        
         testCompile group: 'junit', name: 'junit', version: '4.11'
     }
     
